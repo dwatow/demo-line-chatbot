@@ -10,14 +10,14 @@ var bot = linebot({
 
 // 當有人傳送訊息給Bot時
 bot.on('message', async function ({ source, message, reply }) {
+  console.log('當有人傳送訊息給Bot時');
   const { type } = source
-
 
   const profile = await source.profile()
   const userId = profile.displayName;
 
-
   if (message.type === "image") {
+    console.log('拍照上傳才會做的動作');
     // 拍照上傳才會做的動作
     const { originalContentUrl } = message.contentProvider
     console.log(message.contentProvider);
@@ -25,6 +25,8 @@ bot.on('message', async function ({ source, message, reply }) {
     const origin_url = originalContentUrl;
     const image = userId;
     // const preview_url = previewImageUrl;
+
+    console.log('使用者 userId');
     const post_response = await axios.post(process.env["userProcessStepURI"], {
       type, userId, image
     }, {
@@ -40,12 +42,14 @@ bot.on('message', async function ({ source, message, reply }) {
         "text": "玩完囉~"
       })
     }
+
+    console.log('上傳使用者進度 1');
     const get_response = await axios.get(process.env["giveRecordURI"], {
       params: {
         index: post_response.data
       }
     })
-
+    console.log('回覆錄音檔');
     // console.log(get_response.data);
     const response_list = get_response.data
 

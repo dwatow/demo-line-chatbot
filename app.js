@@ -6,6 +6,8 @@ var bot = linebot({
   channelAccessToken: 'ewXWN4h20PxIhQvJFu4x3b94n5AXMyGZtbcUA9+n9IqAItPvWABoSkrxqiE2jkpIsnXDJLCsPrNu3VMpBToUVuLf4QGmFgh0jWm67sDqnwoLjoYzbh4S8s4zKTyEFtbtIHDKDplcsJBFFHX2TiVZFwdB04t89/1O/w1cDnyilFU='
 });
 
+
+
 bot.on('join', function (event) {
   event.reply("join")
 });

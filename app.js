@@ -3,8 +3,8 @@ var linebot = require('linebot');
 var axios = require("axios");
 var bot = linebot({
   channelId: process.env['LineUserId'],
-  channelSecret: process.env["ChannelAccessToken"],
-  channelAccessToken: process.env["ChannelSecret"]
+  channelSecret: process.env["ChannelSecret"],
+  channelAccessToken: process.env["ChannelAccessToken"]
 });
 
 

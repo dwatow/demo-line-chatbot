@@ -2,9 +2,9 @@
 var linebot = require('linebot');
 var axios = require("axios");
 var bot = linebot({
-  channelId: ENV['LineUserId'],
-  channelSecret: ENV["ChannelAccessToken"],
-  channelAccessToken: ENV["ChannelSecret"]
+  channelId: process.env['LineUserId'],
+  channelSecret: process.env["ChannelAccessToken"],
+  channelAccessToken: process.env["ChannelSecret"]
 });
 
 
@@ -25,7 +25,7 @@ bot.on('message', async function ({ source, message, reply }) {
     const origin_url = originalContentUrl;
     const image = userId;
     // const preview_url = previewImageUrl;
-    const post_response = await axios.post(ENV["userProcessStepURI"], {
+    const post_response = await axios.post(process.env["userProcessStepURI"], {
       type, userId, image
     }, {
       headers: {
@@ -40,7 +40,7 @@ bot.on('message', async function ({ source, message, reply }) {
         "text": "玩完囉~"
       })
     }
-    const get_response = await axios.get(ENV["giveRecordURI"], {
+    const get_response = await axios.get(process.env["giveRecordURI"], {
       params: {
         index: post_response.data
       }

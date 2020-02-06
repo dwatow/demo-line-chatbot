@@ -62,6 +62,6 @@ bot.on('message', async function ({ source, message, reply }) {
 
 // Bot所監聽的webhook路徑與port
 const PORT = process.env.PORT || 3000;
-bot.listen('/', PORT, function () {
+bot.listen('/callback', PORT, function () {
     console.log(`[BOT已準備就緒, port: ${PORT}]`);
 });

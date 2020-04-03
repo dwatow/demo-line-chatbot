@@ -1,17 +1,26 @@
+require('dotenv').config();
 // 引用linebot SDK
-var linebot = require('linebot');
-var axios = require("axios");
-var bot = linebot({
-  channelId: process.env['LineUserId'],
+const linebot = require('linebot');
+
+const fetchDataAPI = require('./fetchDataAPI')
+const { uploadImage } = require('./uploadImageAPI')
+const bot = linebot({
+  channelId: process.env['ChannelId'],
   channelSecret: process.env["ChannelSecret"],
   channelAccessToken: process.env["ChannelAccessToken"]
 });
 
-
 // 當有人傳送訊息給Bot時
 bot.on('message', async function ({ source, message, reply }) {
   console.log('當有人傳送訊息給Bot時');
+
   const { type } = source
+  const imageBse64 = await message.content();
+  // console.log("[imageBse64: ]", imageBse64.toString("base64"));
+  
+  const imgurRes = await uploadImage(imageBse64);
+  
+  
 
   const profile = await source.profile()
   const userId = profile.displayName;
@@ -23,16 +32,12 @@ bot.on('message', async function ({ source, message, reply }) {
     console.log(message.contentProvider);
 
     const origin_url = originalContentUrl;
-    const image = userId;
+    const image = imgurRes.data.link;
     // const preview_url = previewImageUrl;
 
     console.log('使用者 userId');
-    const post_response = await axios.post(process.env["userProcessStepURI"], {
+    const post_response = await fetchDataAPI.post("", {
       type, userId, image
-    }, {
-      headers: {
-        "Content-Type": "application/json"
-      }
     })
 
     console.log(post_response.data);
@@ -44,7 +49,7 @@ bot.on('message', async function ({ source, message, reply }) {
     }
 
     console.log('上傳使用者進度 1');
-    const get_response = await axios.get(process.env["giveRecordURI"], {
+    const get_response = await fetchDataAPI.get("", {
       params: {
         index: post_response.data
       }
@@ -57,6 +62,10 @@ bot.on('message', async function ({ source, message, reply }) {
       "type": "text",
       "text": element
     })));
+  }
+  else {
+    const content = await message.content();
+    console.log("content: ", [...content].map(x => String.fromCharCode(x)).join(""));  
   }
 });
 

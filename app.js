@@ -15,10 +15,10 @@ bot.on('message', async function ({ source, message, reply }) {
   console.log('當有人傳送訊息給Bot時');
 
   const { type } = source
-  const imageBse64 = await message.content();
+  const binaryBuffer = await message.content();
   // console.log("[imageBse64: ]", imageBse64.toString("base64"));
   
-  const imgurRes = await uploadImage(imageBse64);
+  const imgurRes = await uploadImage(binaryBuffer.toString('base64'));
   
   
 

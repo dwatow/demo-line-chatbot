@@ -11,9 +11,9 @@ const imgurAPI = axios.create({
   }
 });
 
-async function uploadImage(imageBase64) {
+async function uploadImage(base64) {
   try {
-    data.append("image", imageBase64.toString('base64'));
+    data.append("image", base64);
     const res =  await imgurAPI.post("", data)
     return res.data;
   } catch (error) {

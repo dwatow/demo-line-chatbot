@@ -6,7 +6,7 @@
 
 **修改 `app.js`**
 
-修改這亖行
+修改這三行
 ```javascript
   channelId: '',
   channelSecret: '',

@@ -1,20 +1,23 @@
 const FormData = require('form-data');
 const axios = require("axios");
 
-const data = new FormData();
 const imgurAPI = axios.create({
   baseURL: process.env["imgurUploadImageAPI"],
   headers: {
     // "Content-Type": "multipart/form-data",
-    ...data.getHeaders(),
     "Authorization": `Client-ID ${process.env["imgurClientID"]}`
   }
 });
 
 async function uploadImage(base64) {
   try {
+    const data = new FormData();
     data.append("image", base64);
-    const res =  await imgurAPI.post("", data)
+    const res =  await imgurAPI.post("", data, {
+      headers: {
+        ...data.getHeaders()
+      }
+    })
     return res.data;
   } catch (error) {
     console.log("error: ", error);

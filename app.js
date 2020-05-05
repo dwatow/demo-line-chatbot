@@ -15,13 +15,8 @@ bot.on('message', async function ({ source, message, reply }) {
   console.log('當有人傳送訊息給Bot時');
 
   const { type } = source
-  const binaryBuffer = await message.content();
-  // console.log("[imageBse64: ]", imageBse64.toString("base64"));
-  
+  const binaryBuffer = await message.content();  
   const imgurRes = await uploadImage(binaryBuffer.toString('base64'));
-  
-  
-
   const profile = await source.profile()
   const userId = profile.displayName;
 

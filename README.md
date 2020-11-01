@@ -23,3 +23,9 @@
 4. `npm start`
 
 啟動服務
+
+## 更新方法
+
+1. 用終端機到專案資料夾
+2. git pull
+3. git push heroku

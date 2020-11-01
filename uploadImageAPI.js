@@ -9,7 +9,7 @@ const imgurAPI = axios.create({
   }
 });
 
-async function uploadImage(base64) {
+async function uploadImageAPI(base64) {
   try {
     const data = new FormData();
     data.append("image", base64);
@@ -25,6 +25,4 @@ async function uploadImage(base64) {
   }
 }
 
-module.exports = {
-  uploadImage
-};
+module.exports = uploadImageAPI;

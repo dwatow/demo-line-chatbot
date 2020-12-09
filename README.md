@@ -29,3 +29,7 @@
 1. 用終端機到專案資料夾
 2. git pull
 3. git push heroku
+
+## 試過的
+
+1. 圖片取不到 exif 因為 LINE 只會把內容傳過來
